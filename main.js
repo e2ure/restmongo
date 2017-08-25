@@ -92,7 +92,7 @@ formuRutes.route('/formularios/:id')
 
 app.use('/api', formuRutes);    
     
-//app.get('/', routes.index);//route customer listv
+app.get('/', routes.index);//route customer listv
 /*app.get('/clientes', clientes.list);//route add customer, get n post
 app.get('/clientes/consultar/:id', clientes.edit);
 app.post('/clientes/redimir/',clientes.redimir);
