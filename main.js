@@ -5,3 +5,61 @@
  */
 
 
+//mongodb://heroku_l4nvh1hr:1bq2rh9lkp2mn0e494gmbrg9sn@ds159033.mlab.com:59033/heroku_l4nvh1hr
+
+var express = require('express');
+var routes = require('./routes');
+var http = require('http');
+var path = require('path');
+
+var formulairos = require('./routes/formularios'); 
+var app = express();
+var connection  = require('express-myconnection');
+var mongoose = require('mongoose');
+var logger = require('morgan');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+var errorhandler = require('errorhandler');
+
+//all environments
+app.set('port', process.env.PORT || 3001);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+//app.use(express.favicon());
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(methodOverride());
+app.use(express.static(path.join(__dirname, 'public')));
+// development only
+if ('development' == app.get('env')) {
+  app.use(errorhandler());
+}
+
+mongoose.connect('mongodb://heroku_l4nvh1hr:1bq2rh9lkp2mn0e494gmbrg9sn@ds159033.mlab.com:59033/heroku_l4nvh1hr');
+
+
+// Create a schema
+
+/*
+app.use(
+    
+    connection(mysql,{
+        
+        host: 'us-cdbr-iron-east-05.cleardb.net',
+        user: "b2831f68136dcd",
+        password: "9654212e",
+        database: "heroku_b7f13a831b669f3"
+    },'request')
+);//route index, hello world*/
+    
+app.get('/', routes.index);//route customer listv
+/*app.get('/clientes', clientes.list);//route add customer, get n post
+app.get('/clientes/consultar/:id', clientes.edit);
+app.post('/clientes/redimir/',clientes.redimir);
+app.post('/clientes/acumular/',clientes.acumular);*/
+//app.use(app.router);
+app.post('/formularios/save/',formularios.redimir);
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
