@@ -33,7 +33,7 @@ app.set('view engine', 'ejs');
 //app.use(express.favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+//app.use(bodyParser.urlencoded());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 
