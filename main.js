@@ -59,13 +59,46 @@ app.use(
     },'request')
 );//route index, hello world*/
     
-app.get('/', routes.index);//route customer listv
+// Example Route
+var router = express.Router();
+router.get('/', function(req, res) {
+  res.send("Hello world!");
+});
+app.use(router);
+
+// API routes
+var formuRutes = express.Router();
+
+/*
+ * /formularios
+ * get: Retorna toda la lista de formularios
+ * post: Ingresa un formulario
+ */
+formuRutes.route('/formularios')
+  .get(formularios.findAllForms)
+  .post(formularios.save);
+
+
+/*
+ * /formularios/:id
+ * get: Retorna un formulario según el id único
+ * put: Actualiza el formulario (estructura)
+ * delete: Borra el formulario indicado
+ */
+formuRutes.route('/formularios/:id')
+  .get(formularios.findById)
+  .put(formularios.update)
+  .delete(formularios.delete);
+
+app.use('/api', formuRutes);    
+    
+//app.get('/', routes.index);//route customer listv
 /*app.get('/clientes', clientes.list);//route add customer, get n post
 app.get('/clientes/consultar/:id', clientes.edit);
 app.post('/clientes/redimir/',clientes.redimir);
 app.post('/clientes/acumular/',clientes.acumular);*/
 //app.use(app.router);
-app.post('/formularios/save/',formularios.save);
+//app.post('/formularios/save/',formularios.save);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

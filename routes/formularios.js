@@ -14,7 +14,7 @@ exports.save = function(req,res){
     /*var id = input.id;
     var puntos =input.puntos;*/
     
-    console.log(req.body);
+    console.log(req);
     var form=new Formulario({
         id:"1",
         complete:false,
@@ -30,4 +30,53 @@ exports.save = function(req,res){
       });
       
       res.json(form);
+};
+
+//GET - Return all tvshows in the DB
+exports.findAllForms = function(req, res) {
+	Formulario.find(function(err, tvshows) {
+    if(err) res.send(500, err.message);
+
+    console.log('GET /formularios')
+        res.status(200).jsonp(tvshows);
+    });
+};
+
+//GET - Return a TVShow with specified ID
+exports.findById = function(req, res) {
+	Formulario.findById(req.params.id, function(err, tvshow) {
+    if(err) return res.send(500, err.message);
+
+    console.log('GET /tvshow/' + req.params.id);
+		res.status(200).jsonp(tvshow);
+	});
+};
+
+
+//PUT - Update a register already exists
+exports.update = function(req, res) {
+	Formulario.findById(req.params.id, function(err, form) {
+		form.id   = req.body.id;
+		form.complete    = req.body.complete;
+		form.formulario = req.body.formulario;
+		/*form.poster  = req.body.poster;
+		form.seasons = req.body.seasons;
+		form.genre   = req.body.genre;
+		form.summary = req.body.summary;*/
+
+		form.save(function(err) {
+			if(err) return res.send(500, err.message);
+      res.status(200).jsonp(form);
+		});
+	});
+};
+
+//DELETE - Delete a TVShow with specified ID
+exports.delete = function(req, res) {
+	Formulario.findById(req.params.id, function(err, tvshow) {
+		tvshow.remove(function(err) {
+			if(err) return res.send(500, err.message);
+      res.status(200);
+		})
+	});
 };
