@@ -12,7 +12,10 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 
-var formulairos = require('./routes/formularios'); 
+// Import Models and controllers
+var models     = require('./models/formulario')(app, mongoose);
+
+var formularios = require('./routes/formularios'); 
 var app = express();
 var connection  = require('express-myconnection');
 var mongoose = require('mongoose');
@@ -20,6 +23,8 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var errorhandler = require('errorhandler');
+
+
 
 //all environments
 app.set('port', process.env.PORT || 3001);
@@ -31,12 +36,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
+
 // development only
 if ('development' == app.get('env')) {
   app.use(errorhandler());
 }
 
-mongoose.connect('mongodb://heroku_l4nvh1hr:1bq2rh9lkp2mn0e494gmbrg9sn@ds159033.mlab.com:59033/heroku_l4nvh1hr');
+//app.use(mongoose.connect('mongodb://heroku_l4nvh1hr:1bq2rh9lkp2mn0e494gmbrg9sn@ds159033.mlab.com:59033/heroku_l4nvh1hr'));
 
 
 // Create a schema
@@ -59,7 +65,7 @@ app.get('/clientes/consultar/:id', clientes.edit);
 app.post('/clientes/redimir/',clientes.redimir);
 app.post('/clientes/acumular/',clientes.acumular);*/
 //app.use(app.router);
-app.post('/formularios/save/',formularios.redimir);
+app.post('/formularios/save/',formularios.save);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
