@@ -33,9 +33,11 @@ app.set('view engine', 'ejs');
 //app.use(express.favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
+
+mongoose.connect('mongodb://heroku_l4nvh1hr:1bq2rh9lkp2mn0e494gmbrg9sn@ds159033.mlab.com:59033/heroku_l4nvh1hr');
 
 // development only
 if ('development' == app.get('env')) {
@@ -92,7 +94,7 @@ formuRutes.route('/formularios/:id')
 
 app.use('/api', formuRutes);    
     
-app.get('/', routes.index);//route customer listv
+//app.get('/', routes.index);//route customer listv
 /*app.get('/clientes', clientes.list);//route add customer, get n post
 app.get('/clientes/consultar/:id', clientes.edit);
 app.post('/clientes/redimir/',clientes.redimir);

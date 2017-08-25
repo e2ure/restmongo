@@ -8,7 +8,7 @@ var Formulario = mongoose.model('Formulario');
 
 exports.save = function(req,res){
     
-    mongoose.connect('mongodb://heroku_l4nvh1hr:1bq2rh9lkp2mn0e494gmbrg9sn@ds159033.mlab.com:59033/heroku_l4nvh1hr');
+    
     
     var input = JSON.parse(JSON.stringify(req.body));
     /*var id = input.id;
