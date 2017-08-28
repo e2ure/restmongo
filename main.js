@@ -33,7 +33,7 @@ app.set('view engine', 'ejs');
 //app.use(express.favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -94,13 +94,6 @@ formuRutes.route('/formularios/:id')
 
 app.use('/api', formuRutes);    
     
-//app.get('/', routes.index);//route customer listv
-/*app.get('/clientes', clientes.list);//route add customer, get n post
-app.get('/clientes/consultar/:id', clientes.edit);
-app.post('/clientes/redimir/',clientes.redimir);
-app.post('/clientes/acumular/',clientes.acumular);*/
-//app.use(app.router);
-//app.post('/formularios/save/',formularios.save);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

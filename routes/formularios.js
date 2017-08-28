@@ -6,19 +6,16 @@
 var mongoose = require('mongoose');
 var Formulario = mongoose.model('Formulario');
 
-exports.save = function(req,res){
+exports.save = function(req,res,body){
     
     
     
-    var input = JSON.parse(JSON.stringify(req.body));
-    /*var id = input.id;
-    var puntos =input.puntos;*/
     
-    console.log(req);
+    console.log(req.body.html);
     var form=new Formulario({
         id:"1",
         complete:false,
-        formulario:JSON.stringify(req.body)
+        formulario:req.body.html
     });
     
     console.log(req.body);
