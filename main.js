@@ -80,6 +80,8 @@ formuRutes.route('/formularios')
   .get(formularios.findAllForms)
   .post(formularios.save);
 
+formuRutes.route('/formularios/etramite/:id')
+  .get(formularios.findByEtramite);
 
 /*
  * /formularios/:id

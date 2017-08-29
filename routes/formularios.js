@@ -13,7 +13,7 @@ exports.save = function(req,res,body){
     
     console.log(req.body.html);
     var form=new Formulario({
-        id:"1",
+        etramiteid:"1",
         complete:false,
         formulario:req.body.html
     });
@@ -44,16 +44,24 @@ exports.findById = function(req, res) {
 	Formulario.findById(req.params.id, function(err, tvshow) {
     if(err) return res.send(500, err.message);
 
-    console.log('GET /tvshow/' + req.params.id);
+    console.log('GET /formularios/' + req.params.id);
 		res.status(200).jsonp(tvshow);
 	});
 };
 
+exports.findByEtramite = function(req, res) {
+	Formulario.findOne({'etramiteid':req.params.id}, function(err, form) {
+    if(err) return res.send(500, err.message);
+
+    console.log('GET /formularios/etramite/' + req.params.id);
+		res.status(200).jsonp(form);
+	});
+};
 
 //PUT - Update a register already exists
 exports.update = function(req, res) {
 	Formulario.findById(req.params.id, function(err, form) {
-		form.id   = req.body.id;
+		form.etramiteid   = req.body.id;
 		form.complete    = req.body.complete;
 		form.formulario = req.body.formulario;
 		/*form.poster  = req.body.poster;

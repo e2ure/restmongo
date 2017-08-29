@@ -6,7 +6,7 @@
  var mongoose = require('mongoose'), 
     Schema   = mongoose.Schema;;
  var SchemaFormulario = new Schema({
-    id: String,
+    etramiteid: String,
     completed: Boolean,
     formulario: String,
     updated_at: { type: Date, default: Date.now }
