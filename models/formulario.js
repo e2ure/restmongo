@@ -8,7 +8,7 @@
  var SchemaFormulario = new Schema({
     etramiteid: String,
     completed: Boolean,
-    formulario: String,
+    formulario: Object,
     updated_at: { type: Date, default: Date.now }
 });
 module.exports = mongoose.model('Formulario', SchemaFormulario);

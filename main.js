@@ -23,7 +23,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var errorhandler = require('errorhandler');
-
+var config = require('./config.json')[process.env.NODE_ENV || 'development'];
 
 
 //all environments
@@ -37,7 +37,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect('mongodb://heroku_l4nvh1hr:1bq2rh9lkp2mn0e494gmbrg9sn@ds159033.mlab.com:59033/heroku_l4nvh1hr');
+//mongoose.connect('mongodb://heroku_l4nvh1hr:1bq2rh9lkp2mn0e494gmbrg9sn@ds159033.mlab.com:59033/heroku_l4nvh1hr');
+mongoose.connect(config.MONGO_URI);
 
 // development only
 if ('development' == app.get('env')) {

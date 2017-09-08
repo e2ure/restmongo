@@ -1,0 +1,10 @@
+{
+    "development": {
+        "MONGO_URI": "mongodb://formularios:P4$$word@192.168.5.50:27017/formularios",
+        "MONGO_OPTIONS": { "db": { "safe": true } }
+    },
+    "production": {
+        "MONGO_URI": "mongodb://formularios:P4$$word@192.168.5.50:27017/formularios",
+        "MONGO_OPTIONS": { "db": { "safe": true } }
+    }
+}
